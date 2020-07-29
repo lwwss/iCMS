@@ -186,7 +186,7 @@ class iDataBase {
         }else{
             return false;
         }
-        return static::query("UPDATE `".static::table($table)."` SET " . implode( ', ', $bits ) . ' WHERE ' . implode( ' AND ', $wheres ) . ' LIMIT 1;' );
+        return static::query("UPDATE `".static::table($table)."` SET " . implode( ', ', $bits ) . ' WHERE ' . implode( ' AND ', $wheres ) );
     }
     public static function delete($table, $where) {
         $wheres = array();

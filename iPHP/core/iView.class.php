@@ -381,12 +381,14 @@ class iView {
     public static function clear($key) {
         self::$handle->clear_assign($key);
     }
-    public static function display($tpl) {
+    public static function display($tpl,$app=null) {
         self::$handle OR self::init();
-        self::$handle->fetch($tpl,true);
+        $app && self::$app = $app;
+        return self::$handle->fetch($tpl,true);
     }
-    public static function fetch($tpl) {
+    public static function fetch($tpl,$app=null){
         self::$handle OR self::init();
+        $app && self::$app = $app;
         return self::$handle->fetch($tpl);
     }
     public static function render($tpl, $app = 'index') {
