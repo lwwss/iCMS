@@ -117,6 +117,14 @@ class apps_mod {
         $json_array  = array(array(),array());
         if(empty($json)) return $json_array;
         $field_array = json_decode($json,true);
+        //兼容旧的字段格式
+        if (is_array($field_array)) {
+          $tmp = $field_array;
+          $tmp = current($tmp);
+          if (!is_array($tmp)) {
+            $field_array = apps_mod::get_field_array($field_array, true);
+          }
+        } 
         foreach ($field_array as $key => $value) {
             $a = array();
             foreach ($value as $k => $v) {

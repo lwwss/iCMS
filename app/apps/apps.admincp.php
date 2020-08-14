@@ -39,6 +39,13 @@ class appsAdmincp{
           if($rs['apptype']=="2"){
             $rs['config']['iFormer'] = '1';
           }
+          if(is_array($rs['fields'])){
+            $tmp = $rs['fields'];
+            $tmp = current($tmp);
+            if(!is_array($tmp)){
+              $rs['fields'] = apps_mod::get_field_array($rs['fields'], true);
+            }
+          }
         }
 
         $rs['config']['template'] = apps_mod::template($rs);
@@ -56,7 +63,7 @@ class appsAdmincp{
         if($rs['router']){
           is_array($rs['router']) OR $rs['router'] = json_decode($rs['router'],true);
         }
-
+        
         include admincp::view("apps.add");
     }
 
